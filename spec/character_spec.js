@@ -6,11 +6,6 @@ describe("Character", function () {
       character = new BX.Character(BX.CL.Races.Human);
       expect(character.race()).toBe(BX.CL.Races.Human);
     });
-    
-    it("accepts a string as the 'race' parameter", function () {
-      character = new BX.Character("human");
-      expect(character.race()).toBe(BX.CL.Races.Human);
-    });
   });
   
   describe(".statBonus", function () {
