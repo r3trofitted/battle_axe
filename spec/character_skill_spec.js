@@ -4,12 +4,12 @@ describe("A Skill", function () {
   
   beforeEach(function () {
     character = new BattleAxe.Character();
-    skill     = BattleAxe.skill(character);
+    skill     = BattleAxe.CharacterSkill.create(character);
   });
   
   describe(".bonus()", function () {
     it("is the sum of ranks, stat, level, objects and misc bonuses", function () {
-      var skill = BattleAxe.skill(new BattleAxe.Character());
+      var skill = BattleAxe.CharacterSkill.create(new BattleAxe.Character());
       
       spyOn(skill, 'ranksBonus').andReturn(BX.bonus(5));
       spyOn(skill, 'statBonus').andReturn(BX.bonus(10));
@@ -41,24 +41,24 @@ describe("A Skill", function () {
   describe("._actualRanksBonus()", function () {
     it("is 5 per rank up to rank 10", function () {
       for (var i = 1; i <= 10; i++) {
-        var skill = BattleAxe.skill(undefined, undefined, { ranks: i });
+        var skill = BattleAxe.CharacterSkill.create(undefined, undefined, { ranks: i });
         expect(skill._actualRanksBonus()).toBeABonusOf(i*5);
       }
     });
     it("is 2 per rank from rank 11 up to rank 20", function () {
       for (var i = 11; i <= 20; i++) {
-        var skill = BattleAxe.skill(undefined, undefined, { ranks: i });
+        var skill = BattleAxe.CharacterSkill.create(undefined, undefined, { ranks: i });
         expect(skill._actualRanksBonus()).toBeABonusOf(50 + (i - 10)*2);
       }
     });
     it("is 1 per rank from rank 21 up to rank 25", function () {
       for (var i = 21; i <= 25; i++) {
-        var skill = BattleAxe.skill(undefined, undefined, { ranks: i });
+        var skill = BattleAxe.CharacterSkill.create(undefined, undefined, { ranks: i });
         expect(skill._actualRanksBonus()).toBeABonusOf(70 + (i - 20)*1);
       }
     });
     it("is -25 if the skill has no rank", function () {
-      expect(BattleAxe.skill()._actualRanksBonus()).toBeABonusOf(-25);
+      expect(BattleAxe.CharacterSkill.create()._actualRanksBonus()).toBeABonusOf(-25);
     });
   });
   
@@ -97,13 +97,13 @@ describe("A Skill", function () {
 
   describe(".statBonus()", function () {
     it("returns a no-value bonus if it has no associated stat", function () {
-      var skill = BattleAxe.skill();
+      var skill = BattleAxe.CharacterSkill.create();
       
       expect(skill.statBonus()).toBeANoValueBonus();
     });
     
     it("asks its character for the appropriate stats bonus", function () {
-      var skill = BattleAxe.skill(character, undefined, { stat: "ST" });
+      var skill = BattleAxe.CharacterSkill.create(character, undefined, { stat: "ST" });
       var bonus = BX.bonus(20)
       spyOn(character, "statBonus").andReturn(bonus);
       
