@@ -1,16 +1,25 @@
 describe("Character", function () {
   var character;
   
-  describe("the constructor", function () {
-    it("accepts a 'race' parameter", function () {
-      character = new BX.Character(BX.CL.Races.Human);
-      expect(character.race()).toBe(BX.CL.Races.Human);
+  describe(".init()", function () {
+    beforeEach(function () {
+      character = Object.create(BattleAxe.Character);
     });
-  });
-  
-  describe(".statBonus", function () {
-    it("depends on the character's profession", function () {
-      // character = new BX.Character(undefined, "fighter");
+    
+    it("accepts a 'race' argument", function () {
+      var race = BattleAxe.Race.forge({ name: "StubbedRace" });
+      
+      character.init(race, stubs.profession());
+      
+      expect(character.race).toBe(race);
     });
-  });
+    
+    it("accepts a 'profession' argument", function () {
+      var profession = BattleAxe.Profession.forge({ name: "StubbedProfession" });
+      
+      character.init(stubs.race(), profession);
+      
+      expect(character.profession).toBe(profession);
+    });
+  });  
 });

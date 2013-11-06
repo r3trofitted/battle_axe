@@ -3,14 +3,12 @@ describe("A Skill", function () {
   var skill;
   
   beforeEach(function () {
-    character = new BattleAxe.Character();
+    character = stubs.character();
     skill     = BattleAxe.CharacterSkill.create(character);
   });
   
   describe(".bonus()", function () {
     it("is the sum of ranks, stat, level, objects and misc bonuses", function () {
-      var skill = BattleAxe.CharacterSkill.create(new BattleAxe.Character());
-      
       spyOn(skill, 'ranksBonus').andReturn(BX.bonus(5));
       spyOn(skill, 'statBonus').andReturn(BX.bonus(10));
       spyOn(skill, 'levelBonus').andReturn(BX.bonus(15));

@@ -1,3 +1,9 @@
+var stubs = {
+  character:  function () { return Object.create(BattleAxe.Character) },
+  race:       function () { return Object.create(BattleAxe.Race) },
+  profession: function () { return Object.create(BattleAxe.Profession) }
+};
+
 beforeEach(function() {
   this.addMatchers({
     toBeABonusOf: function (expectedBonusValue) {
@@ -20,5 +26,9 @@ beforeEach(function() {
       
       return this.actual.value === undefined;
     },
+    
+    toBeOfRace: function (expectedRace) {
+      return expectedRace.isPrototypeOf(this.actual);
+    }
   });
 });
