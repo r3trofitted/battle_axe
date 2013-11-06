@@ -1,13 +1,12 @@
-describe("BattleAxe.bonus()", function () {
-  it("accepts another Bonus object as a value", function () {
-    var value = BattleAxe.bonus(10);
-    var bonus = BattleAxe.bonus(value);
-    
-    expect(bonus).toBeABonusOf(10);
-  });
-});
-
 describe("A Bonus object", function () {
+  describe(".create()", function () {
+    it("accepts another Bonus object as a value", function () {
+      var value = BattleAxe.Bonus.create(10);
+      var bonus = BattleAxe.Bonus.create(value);
+    
+      expect(bonus).toBeABonusOf(10);
+    });
+  });
   describe(".inscribe()", function () {
     it("returns the value prefixed with a + sign if the value is positive", function () {
       var bonus = BattleAxe.bonus(20);
