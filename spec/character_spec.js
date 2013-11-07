@@ -7,7 +7,7 @@ describe("Character", function () {
     });
     
     it("accepts a 'race' argument", function () {
-      var race = BattleAxe.Race.forge({ name: "StubbedRace" });
+      var race = BattleAxe.Race.forge();
       
       character.init(race, stubs.profession());
       
@@ -15,11 +15,17 @@ describe("Character", function () {
     });
     
     it("accepts a 'profession' argument", function () {
-      var profession = BattleAxe.Profession.forge({ name: "StubbedProfession" });
+      var profession = BattleAxe.Profession.forge();
       
       character.init(stubs.race(), profession);
       
       expect(character.profession).toBe(profession);
     });
-  });  
+  });
+  
+  describe(".statBonus()", function () {
+    it("returns the total bonus for the requested stat", function () {
+      // TODO
+    });
+  });
 });
